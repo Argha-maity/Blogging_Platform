@@ -1,0 +1,388 @@
+:root {
+  --accent: #ba68c8;
+  --error: #ff6b6b;
+  --bg-light: #f8f9fa;
+  --text: #333;
+  --white: #fff;
+  --border: #ddd;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Auth Layout */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #ffe9e9, #f5e6ff);
+  padding: 2rem 1rem;
+}
+
+.auth-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-card h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.auth-card p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-card label {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.auth-card input,
+.auth-card textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.auth-card input:focus,
+.auth-card textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(186, 104, 200, 0.2);
+}
+
+.auth-toggle {
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.auth-toggle button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0;
+  font: inherit;
+  transition: color 0.2s ease;
+}
+
+.auth-toggle button:hover {
+  color: #9c27b0; 
+  text-decoration: none; 
+}
+
+/* Navbar */
+@media (max-width: 480px) {
+  .nav-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .branding h1 {
+    font-size: 1.25rem;
+  }
+}
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navbar {
+  background: var(--white);
+  padding: 1rem 0;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: auto;
+}
+
+.branding img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-btn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.user-btn img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.user-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  min-width: 160px;
+  box-shadow: var(--shadow);
+  z-index: 100;
+  border-radius: var(--radius);
+  margin-top: 0.5rem;
+}
+
+.dropdown-arrow {
+  font-size: 0.6rem;
+  margin-left: 0.3rem;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text);
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown a, .dropdown button {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.dropdown a:hover, .dropdown button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown.show {
+  display: block;
+}
+
+/* Dashboard */
+.dashboard {
+  padding: 2rem 1rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.tab {
+  padding: 0.5rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.posts-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-form label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.post-form input,
+.post-form textarea {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.post-form input[type="file"] {
+  padding: 0.3rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header button {
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.primary {
+  background: linear-gradient(to right, var(--error), var(--accent));
+  color: var(--white);
+}
+
+.primary:hover {
+  opacity: 0.9;
+}
+
+button:focus, a:focus, input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
