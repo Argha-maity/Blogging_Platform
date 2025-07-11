@@ -34,11 +34,13 @@ async function handleSignup(e) {
       //storing authentication tokens
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify({
+        id: data._id,
         name: userData.username,
         email: userData.email
       }));
 
       setCurrentUser({
+        id: data._id,
         name: userData.username,
         email: userData.email
       });

@@ -36,6 +36,7 @@ async function handleLogin(e) {
         }));
 
         setCurrentUser({
+          id: data._id,
           name : data.username,
           email : data.email
         });

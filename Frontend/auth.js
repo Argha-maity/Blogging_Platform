@@ -44,7 +44,7 @@ export function initAuth() {
 
 // Toggle user menu
 export function toggleUserMenu() {
-  userMenu.classList.toggle('hidden');
+  userMenu.classList.toggle('show');
 }
 
 // Show login page
@@ -79,6 +79,10 @@ export function setCurrentUser(user) {
   currentUser = user;
   localStorage.setItem("user", JSON.stringify(user));
   if (usernameDisplay) usernameDisplay.textContent = user?.name || 'Guest';
+}
+
+export function getToken() {
+  return localStorage.getItem('token');
 }
 
 // Logout handler

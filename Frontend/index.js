@@ -30,4 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('close-modal-btn')?.addEventListener('click', () => {
     document.getElementById('create-post-modal').classList.add('hidden');
   });
+
+  //setup cancel button
+  document.getElementById('cancel-post-btn')?.addEventListener('click', () => {
+    document.getElementById('create-post-modal').classList.add('hidden');
+  });
+
+    // Toggle user dropdown menu
+  const userBtn = document.getElementById("user-menu-btn");
+  const dropdown = document.getElementById("user-menu");
+
+  if (userBtn && dropdown) {
+    userBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle("hidden");
+    });
+
+    // Hide dropdown if click outside
+    document.addEventListener("click", (e) => {
+      if (!userBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.add("hidden");
+      }
+    });
+  }
+
+  // Hide dropdown when create post modal opens
+  document.getElementById('create-post-btn')?.addEventListener('click', () => {
+    document.getElementById('create-post-modal').classList.remove('hidden');
+    dropdown?.classList.add('hidden'); // hides dropdown on modal open
+  });
 });
