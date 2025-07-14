@@ -6,7 +6,7 @@ const protect = async (req, res, next) => {
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         console.warn('Authorization header missing or improperly formatted');
-        return res.status(401).json({ 
+        return res.status(401).json({
             error: "Authentication required",
             details: "Authorization header missing or malformed"
         });
@@ -17,12 +17,15 @@ const protect = async (req, res, next) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
 
-        if (!decoded || !decoded.id) {
+        if (!decoded || (!decoded.id && !decoded._id)) {
             console.error('Decoded token missing expected fields:', decoded);
             return res.status(401).json({ error: "Invalid token payload" });
         }
 
-        req.user = decoded;
+        req.user = {
+            id: decoded.id || decoded._id,
+            name: decoded.name || decoded.username || 'Unknown'
+        };
         next();
     } catch (error) {
         console.error('JWT verification failed:', error.message);

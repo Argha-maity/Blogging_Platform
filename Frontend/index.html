@@ -10,16 +10,14 @@
 
 <body>
   <div id="app">
-
     <!-- Auth Section -->
     <section id="auth-page">
-      <!-- Login -->
       <div id="login-page" class="auth-wrapper">
         <div class="auth-card">
           <h2>Login</h2>
           <p>Welcome back to your blog</p>
           <form id="login-form">
-            <label for="login-email">Email
+            <label>Email
               <input type="email" id="login-email" required />
             </label>
             <label>Password
@@ -32,8 +30,6 @@
           </form>
         </div>
       </div>
-
-      <!-- Signup -->
       <div id="signup-page" class="auth-wrapper hidden">
         <div class="auth-card">
           <h2>Sign Up</h2>
@@ -42,7 +38,7 @@
             <label>Full Name
               <input type="text" name="signup-name" id="signup-name" required />
             </label>
-            <label for="login-email">Email
+            <label>Email
               <input type="email" name="signup-email" id="signup-email" required />
             </label>
             <label>Password
@@ -59,27 +55,22 @@
 
     <!-- Main App -->
     <main id="main-app" class="hidden">
-      <!-- Navbar -->
       <header class="navbar">
         <div class="container nav-content">
           <div class="branding">
-            <img
-              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1042efc-ee39-4564-9174-94b28b4f3858.png"
-              alt="Logo" />
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1042efc-ee39-4564-9174-94b28b4f3858.png" alt="Logo" />
             <h1>Connect & Create</h1>
           </div>
           <div class="nav-actions">
             <button id="create-post-btn" class="btn primary">Create Post</button>
             <div class="user-dropdown-wrapper">
               <button id="user-menu-btn" class="user-btn">
-                <img
-                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/001f7e11-f706-4698-8188-c47a8308224d.png"
-                  alt="User Avatar" />
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/001f7e11-f706-4698-8188-c47a8308224d.png" alt="User Avatar" />
                 <span id="username-display">Username</span>
               </button>
-              <div id="user-menu" class="dropdown">
-                <a href="#" class="dropdown-item">Profile</a>
-                <a href="#" class="dropdown-item">Settings</a>
+              <div id="user-menu" class="dropdown hidden">
+                <a href="#" id="profile-btn" class="dropdown-item">Profile</a>
+                <a href="#" id="settings-btn" class="dropdown-item">Settings</a>
                 <button id="logout-btn" class="dropdown-item">Logout</button>
               </div>
             </div>
@@ -87,14 +78,13 @@
         </div>
       </header>
 
-      <!-- Main Content -->
+      <!-- Dashboard Section -->
       <section class="dashboard container">
-        <!-- Modal -->
         <div id="create-post-modal" class="modal hidden">
           <div class="modal-box">
             <div class="modal-header">
               <h2>Create New Post</h2>
-              <button id="close-modal-btn">✕</button>
+              <button id="close-modal-btn">x</button>
             </div>
             <form id="post-form" class="post-form" onsubmit="return false;">
               <div class="form-group">
@@ -117,23 +107,38 @@
           </div>
         </div>
 
+        <div class="tabs">
+          <button id="all-posts-tab" class="tab active">All Posts</button>
+          <button id="my-posts-tab" class="tab">My Posts</button>
+        </div>
+
+        <div id="posts-container" class="posts-list">
+          <!-- Posts render here -->
+        </div>
+      </section>
+
+      <!-- Profile Panel -->
+      <section id="profile-panel" class="hidden container">
+        <h2 class="text-xl font-bold mb-2">My Profile</h2>
+        <p><strong>Username:</strong> <span id="profile-username"></span></p>
+        <p><strong>Email:</strong> <span id="profile-email"></span></p>
+        <button class="btn mt-3" onclick="location.reload()">Back to Dashboard</button>
+      </section>
+
+      <!-- Settings Panel -->
+      <section id="settings-panel" class="hidden container">
+        <h2 class="text-xl font-bold mb-2">Settings</h2>
+        <form id="settings-form">
+          <label for="new-username">New Username</label>
+          <input type="text" id="new-username" class="block border rounded p-1" />
+          <button type="submit" class="btn primary mt-2">Save Changes</button>
+        </form>
+        <button class="btn mt-3" onclick="location.reload()">Back to Dashboard</button>
+      </section>
+    </main>
   </div>
 
-
-  <!-- Tabs -->
-  <div class="tabs">
-    <button id="all-posts-tab" class="tab active">All Posts</button>
-    <button id="my-posts-tab" class="tab">My Posts</button>
-  </div>
-
-  <!-- Posts -->
-  <div id="posts-container" class="posts-list">
-    <!-- Posts will be injected here -->
-  </div>
-  </section>
-  </main>
-  </div>
-
+  <!-- Scripts -->
   <script type="module" src="auth.js"></script>
   <script type="module" src="login.js"></script>
   <script type="module" src="signup.js"></script>

@@ -1,11 +1,13 @@
 const Post = require('../models/Post');
 const XLSX = require('xlsx');
 const fs = require('fs');
-const path = require('path'); // 👈 make sure to import this
+const path = require('path'); 
 
 const createPost = async (req, res) => {
     try {
-        const { title, content, author, authorId } = req.body;
+        const { title, content } = req.body;
+        const authorId = req.user.id;
+        const author = req.user.username || req.user.name || req.user.email || 'Unknown';
 
         let fileContent = '';
 
@@ -35,7 +37,7 @@ const createPost = async (req, res) => {
 
         await post.save();
 
-        res.status(201).json(post); // ✅ Send complete post (with fileContent) to frontend
+        res.status(201).json(post); 
     } catch (err) {
         console.error('Error in createPost:', err);
         res.status(500).json({ error: 'Post creation failed.' });
@@ -43,13 +45,13 @@ const createPost = async (req, res) => {
 };
 
 const getAllPosts = async (req, res) => {
-  try {
-    const posts = await Post.find().sort({ createdAt: -1 });
-    res.json(posts);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch posts.' });
-  }
+    try {
+        const posts = await Post.find().sort({ createdAt: -1 });
+        res.json(posts);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch posts.' });
+    }
 };
 
 const deletePost = async (req, res) => {
@@ -105,9 +107,19 @@ const updatePost = async (req, res) => {
     }
 };
 
+const deleteAllpost = async (req, res) => {
+    try {
+    await Post.deleteMany({});
+    res.json({ message: 'All posts deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to delete posts' });
+  }
+}
+
 module.exports = {
     createPost,
     getAllPosts,
     deletePost,
     updatePost,
+    deleteAllpost,
 };

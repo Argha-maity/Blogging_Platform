@@ -76,9 +76,16 @@ export function getCurrentUser() {
 
 // Set current user
 export function setCurrentUser(user) {
-  currentUser = user;
-  localStorage.setItem("user", JSON.stringify(user));
-  if (usernameDisplay) usernameDisplay.textContent = user?.name || 'Guest';
+  const normalizedUser = {
+    id: user._id || user.id,
+    name: user.username || user.name || 'Unknown',
+    email: user.email,
+  };
+
+  currentUser = normalizedUser;
+  localStorage.setItem("user", JSON.stringify(normalizedUser));
+
+  if (usernameDisplay) usernameDisplay.textContent = normalizedUser.name;
 }
 
 export function getToken() {
@@ -99,6 +106,4 @@ export function handleLogout() {
   // Reset any active tabs
   document.getElementById('all-posts-tab')?.classList.add('active');
   document.getElementById('my-posts-tab')?.classList.remove('active');
-  
-  console.log('User logged out successfully');
 }

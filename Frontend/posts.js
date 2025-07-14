@@ -195,7 +195,7 @@ function createPostElement(post) {
           <h4 class="font-semibold mb-2">Uploaded Image:</h4>
           <img src="http://localhost:8006${post.fileContent}" alt="Uploaded Image" class="rounded shadow max-w-full" />
         </div>`;
-        } else if (lower.endsWith('.mp4') || lower.endsWith('.webm')) {
+        } else if (lower.endsWith('.mp4') || lower.endsWith('.webm') || lower.endsWith('.m4v')) {
             fileBlock = `
         <div class="mt-4">
           <h4 class="font-semibold mb-2">Uploaded Video:</h4>
