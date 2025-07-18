@@ -8,6 +8,8 @@ const {
     deletePost,
     updatePost, 
     deleteAllpost,
+    likePost,
+    addComment,
 } = require('../controllers/Post');
 
 const router = express.Router();
@@ -27,6 +29,8 @@ router.post('/create', protect, upload.single('file'), createPost);
 router.get('/', getAllPosts);
 router.delete('/:id', protect, deletePost);
 router.put('/:id', protect, upload.single('file'), updatePost);
-router.delete('/clear/all',deleteAllpost);
+router.delete('/clear/all', deleteAllpost);
+router.post('/:id/like', protect, likePost);
+router.post('/:id/comment', protect, addComment);
 
 module.exports = router;

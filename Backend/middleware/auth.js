@@ -17,13 +17,20 @@ const protect = async (req, res, next) => {
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
 
+        const userId = decoded.id || decoded._id;
+
+        if (!userId) {
+            return res.status(401).json({ error: "Invalid token payload" });
+        }
+
         if (!decoded || (!decoded.id && !decoded._id)) {
             console.error('Decoded token missing expected fields:', decoded);
             return res.status(401).json({ error: "Invalid token payload" });
         }
 
         req.user = {
-            id: decoded.id || decoded._id,
+            id: userId,
+            _id: userId,
             name: decoded.name || decoded.username || 'Unknown'
         };
         next();

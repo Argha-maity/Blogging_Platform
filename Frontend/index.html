@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connect & Create</title>
   <link rel="stylesheet" href="index.css" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
@@ -58,14 +60,18 @@
       <header class="navbar">
         <div class="container nav-content">
           <div class="branding">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1042efc-ee39-4564-9174-94b28b4f3858.png" alt="Logo" />
+            <img
+              src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a1042efc-ee39-4564-9174-94b28b4f3858.png"
+              alt="Logo" />
             <h1>Connect & Create</h1>
           </div>
           <div class="nav-actions">
             <button id="create-post-btn" class="btn primary">Create Post</button>
             <div class="user-dropdown-wrapper">
               <button id="user-menu-btn" class="user-btn">
-                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/001f7e11-f706-4698-8188-c47a8308224d.png" alt="User Avatar" />
+                <img
+                  src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/001f7e11-f706-4698-8188-c47a8308224d.png"
+                  alt="User Avatar" />
                 <span id="username-display">Username</span>
               </button>
               <div id="user-menu" class="dropdown hidden">
@@ -113,7 +119,62 @@
         </div>
 
         <div id="posts-container" class="posts-list">
-          <!-- Posts render here -->
+          <!-- Posts will be rendered here with like and comment functionality -->
+          <!-- Example post structure (will be generated dynamically) -->
+          <div class="post-card hidden" id="post-template">
+            <div class="post-header">
+              <h3 class="post-title">Post Title</h3>
+              <div class="post-author">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZWVlZWVlIi8+PHRleHQgeD0iNTAiIHk9IjUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiPjQweDQwPC90ZXh0Pjwvc3ZnPg==" alt="Author" class="author-avatar" />
+                <span class="author-name">Author Name</span>
+              </div>
+            </div>
+            <div class="post-content">
+              <p>Post content goes here...</p>
+            </div>
+            <div class="post-footer">
+              <div class="post-actions">
+                <button class="like-btn">
+                  <i class="far fa-heart"></i>
+                  <span class="like-count">0</span>
+                </button>
+                <button class="comment-toggle-btn">
+                  <i class="far fa-comment"></i>
+                  <span class="comment-count">0</span>
+                </button>
+              </div>
+              <div class="post-stats">
+                <span class="post-date">Posted on <span class="date">June 1, 2023</span></span>
+              </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section hidden">
+              <div class="comments-list">
+                <!-- Comments will be rendered here -->
+                <div class="comment">
+                  <div class="comment-author">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjZWVlZWVlIi8+PHRleHQgeD0iNTAiIHk9IjUwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5OTkiPjMweDMwPC90ZXh0Pjwvc3ZnPg==" alt="Commenter" class="commenter-avatar" />
+                    <span class="commenter-name">Commenter Name</span>
+                  </div>
+                  <div class="comment-content">
+                    <p>This is a sample comment.</p>
+                  </div>
+                  <div class="comment-meta">
+                    <span class="comment-date">2 days ago</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add Comment Form -->
+              <form class="add-comment-form">
+                <div class="form-group">
+                  <textarea class="comment-input" placeholder="Write a comment..." rows="2"></textarea>
+                </div>
+                <button type="submit" class="btn primary small">Post Comment</button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
 

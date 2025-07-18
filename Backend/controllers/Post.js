@@ -1,7 +1,8 @@
 const Post = require('../models/Post');
 const XLSX = require('xlsx');
 const fs = require('fs');
-const path = require('path'); 
+const path = require('path');
+const mongoose = require('mongoose');
 
 const createPost = async (req, res) => {
     try {
@@ -37,7 +38,7 @@ const createPost = async (req, res) => {
 
         await post.save();
 
-        res.status(201).json(post); 
+        res.status(201).json(post);
     } catch (err) {
         console.error('Error in createPost:', err);
         res.status(500).json({ error: 'Post creation failed.' });
@@ -109,11 +110,91 @@ const updatePost = async (req, res) => {
 
 const deleteAllpost = async (req, res) => {
     try {
-    await Post.deleteMany({});
-    res.json({ message: 'All posts deleted' });
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to delete posts' });
-  }
+        await Post.deleteMany({});
+        res.json({ message: 'All posts deleted' });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete posts' });
+    }
+}
+
+const likePost = async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        const userId = req.user._id;
+        const likeIndex = post.likes.indexOf(userId);
+
+        if (likeIndex === -1) {
+            post.likes.push(userId);
+        } else {
+            post.likes.splice(likeIndex, 1);
+        }
+
+        const updatedPost = await post.save();
+        res.json(updatedPost);
+    } catch (err) {
+        res.status(500).json({ message: 'Server error' });
+    }
+}
+
+const addComment = async (req, res) => {
+    try {
+        const { text } = req.body;
+        
+        // Validate input
+        if (!text || typeof text !== 'string' || text.trim().length === 0) {
+            return res.status(400).json({ message: 'Valid comment text is required' });
+        }
+
+        // Validate post ID format
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'Invalid post ID format' });
+        }
+
+        // Find the post
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Verify user exists and has proper ID
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ message: 'User authentication invalid' });
+        }
+
+        // Create new comment with proper ObjectId
+        const newComment = {
+            userId: req.user._id, // Use the ObjectId version
+            userName: req.user.name,
+            text: text.trim(),
+            createdAt: new Date()
+        };
+
+        // Add comment and save
+        post.comments.unshift(newComment);
+        const savedPost = await post.save();
+
+        return res.status(201).json(savedPost);
+        
+    } catch (err) {
+        console.error('Error adding comment:', {
+            error: err.message,
+            stack: err.stack,
+            request: {
+                params: req.params,
+                body: req.body,
+                user: req.user
+            }
+        });
+        
+        return res.status(500).json({ 
+            message: 'Failed to add comment',
+            error: process.env.NODE_ENV === 'development' ? err.message : undefined
+        });
+    }
 }
 
 module.exports = {
@@ -122,4 +203,6 @@ module.exports = {
     deletePost,
     updatePost,
     deleteAllpost,
+    likePost,
+    addComment,
 };
